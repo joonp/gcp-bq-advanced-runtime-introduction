@@ -41,7 +41,7 @@
       `sales_data`;
     ```
 
-- **공통 하위 표현식 제거(Common Subexpression Elimination)**: 공통 하위 표현식 제거는 쿼리 실행시 여러곳에서 반복적으로 사용되는 동일한 표현식(Common Subexpression)을 한번만 계산하도록 하는 최적화된 기법입니다. 아래 쿼리에서 `sale_price + tax_amount` 라는 표현식이 `subtotal` 과 `discounted_subtotal` 두곳에서 반복적으로 사용되고 있습니다. 공통 하위 표현식 제거를 적용하면 `sales_price + tax_amount` 를 한번만 계산하고, 결과를 임시 변수나 레지스터에 저장하고, 저장된 결과를 `subtotal` 과 ‘discounted_subtotal’ 계산에 재사용(**수학에 “[치환](https://ko.wikipedia.org/wiki/%EC%B9%98%ED%99%98#:~:text=%EC%B9%98%ED%99%98%EC%9D%80%20%EC%88%98%EC%8B%9D%EC%9D%98%20%EC%96%B4%EB%96%A4,%ED%95%A8%EC%88%98%EB%A1%9C%20%EB%8C%80%EC%8B%A0%ED%95%98%EB%8A%94%20%EA%B2%83%EC%9D%B4%EB%8B%A4.)”을 생각하시면 편합니다 =p**)합니다. 해당 기술은 복잡한 함수 호출이나 연산이 많은 쿼리에서 빛을 발합니다. **동일한 계산을 여러 번 반복하는 것을 방지하여 쿼리 실행 시간을 단축시키고, 불필요한 연산 낭비를 없애줍니다.**
+- **공통 하위 표현식 제거(Common Subexpression Elimination)**: 공통 하위 표현식 제거는 쿼리 실행시 여러곳에서 반복적으로 사용되는 동일한 표현식(Common Subexpression)을 한번만 계산하도록 하는 최적화된 기법입니다. 아래 쿼리에서 `sale_price + tax_amount` 라는 표현식이 `subtotal` 과 `discounted_subtotal` 두곳에서 반복적으로 사용되고 있습니다. 공통 하위 표현식 제거를 적용하면 `sales_price + tax_amount` 를 한번만 계산하고, 결과를 임시 변수나 레지스터에 저장하고, 저장된 결과를 `subtotal` 과 `discounted_subtotal` 계산에 재사용(**수학에 “[치환](https://ko.wikipedia.org/wiki/%EC%B9%98%ED%99%98#:~:text=%EC%B9%98%ED%99%98%EC%9D%80%20%EC%88%98%EC%8B%9D%EC%9D%98%20%EC%96%B4%EB%96%A4,%ED%95%A8%EC%88%98%EB%A1%9C%20%EB%8C%80%EC%8B%A0%ED%95%98%EB%8A%94%20%EA%B2%83%EC%9D%B4%EB%8B%A4.)”을 생각하시면 편합니다 =p**)합니다. 해당 기술은 복잡한 함수 호출이나 연산이 많은 쿼리에서 빛을 발합니다. **동일한 계산을 여러 번 반복하는 것을 방지하여 쿼리 실행 시간을 단축시키고, 불필요한 연산 낭비를 없애줍니다.**
 
     ```sql
     ## Common Subexpression Elimination example
