@@ -58,7 +58,7 @@
 
 ## 2 .  Short Query Optimization: 짧은 쿼리 최적화를 통한 혁신
 
-짧은 쿼리 최적화(Short Query Optimization)는 대시보드와 같은 BI(Business Intelligence) 도구에서 생성되는 짧고 빈번하게 실행되는 쿼리들을 극적으로 가속화하는데 사용됩니다. 일반적으로 빅쿼리는 복잡한 쿼리를 여러단계(`stage`)로 나누어 병렬로 처리 합니다. 하지만, 짧고 빈번하게 실행되는 쿼리는 이러한 다단계 분산 처리 방식을 건너 뛰고, 단일의 효율적인 단계(`single stage`)로 통합하여 실행합니다. 이를 통하여, 데이터 셔플링 및 분산처리 오버헤드를 줄여 성능과 효율성을 크게 높일 수 있습니다. 다만, 짧은 쿼리 최적화를 사용한다고 해서 셔플이 아예 일어나지 않는 것은 아닙니다. 셔플은 여전히 필요할 수 있지만, 최적화를 통해 그 양과 횟수가 크게 감소하여 쿼리 성능이 향상 되는 것입니다.
+짧은 쿼리 최적화(Short Query Optimization)는 대시보드와 같은 BI(Business Intelligence) 도구에서 생성되는 짧고 빈번하게 실행되는 쿼리들을 극적으로 가속화하는데 사용됩니다. 일반적으로 빅쿼리는 복잡한 쿼리를 여러단계(`stage`)로 나누어 병렬로 처리 합니다. 하지만, 짧고 빈번하게 실행되는 쿼리는 이러한 다단계 분산 처리 방식을 건너 뛰고, 단일의 효율적인 단계(`single stage`)로 통합하여 실행합니다. 이를 통하여, 데이터 셔플링 및 분산처리 오버헤드를 줄여 성능과 효율성을 크게 높일 수 있습니다. 다만, 짧은 쿼리 최적화를 사용한다고 해서 [셔플(shuffle)](https://cloud.google.com/blog/products/bigquery/in-memory-query-execution-in-google-bigquery)이 아예 일어나지 않는 것은 아닙니다. 셔플은 여전히 필요할 수 있지만, 최적화를 통해 그 양과 횟수가 크게 감소하여 쿼리 성능이 향상 되는 것입니다.
 
 <p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/b0bcebfd-e541-4fca-b7d2-03ea0af6b0b9">    
 	
@@ -185,5 +185,6 @@
   - [BigQuery explained: An overview of BigQuery's architecture](https://cloud.google.com/blog/products/data-analytics/new-blog-series-bigquery-explained-overview)
   - [Overview of BigQuery Storage](https://cloud.google.com/bigquery/docs/storage_overview)
   - [Speed, scale and reliability: 25 years of Google data-center networking evolution](https://cloud.google.com/blog/products/networking/speed-scale-reliability-25-years-of-data-center-networking?e=48754805)
+  - [In-memory query execution in Google BigQuery](https://cloud.google.com/blog/products/bigquery/in-memory-query-execution-in-google-bigquery)
   - [Jupiter Evolving: Transforming Google's Datacenter Network via Optical Circuit Switches and Software-Defined Networking](https://research.google/pubs/jupiter-evolving-transforming-googles-datacenter-network-via-optical-circuit-switches-and-software-defined-networking/)
   - [Single instruction, multiple data](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)
