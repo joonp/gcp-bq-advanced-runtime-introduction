@@ -60,7 +60,7 @@
 
 짧은 쿼리 최적화(Short Query Optimization)는 대시보드와 같은 BI(Business Intelligence) 도구에서 생성되는 짧고 빈번하게 실행되는 쿼리들을 극적으로 가속화하는데 사용됩니다. 일반적으로 빅쿼리는 복잡한 쿼리를 여러단계(`stage`)로 나누어 병렬로 처리 합니다. 하지만, 짧고 빈번하게 실행되는 쿼리는 이러한 다단계 분산 처리 방식을 건너 뛰고, 단일의 효율적인 단계(`single stage`)로 통합하여 실행합니다. 이를 통하여, 데이터 셔플링 및 분산처리 오버헤드를 줄여 성능과 효율성을 크게 높일 수 있습니다. 다만, 짧은 쿼리 최적화를 사용한다고 해서 셔플이 아예 일어나지 않는 것은 아닙니다. 셔플은 여전히 필요할 수 있지만, 최적화를 통해 그 양과 횟수가 크게 감소하여 쿼리 성능이 향상 되는 것입니다.
 
-<p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/6d6eb12e-746a-401b-975b-a5974dafadf2">    
+<p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/38160a1e-2ce3-4cf5-9fbd-c54028c7ea2f">    
 	
 결론적으로, **짧은 쿼리 최적화 기능은 빅쿼리에서 다단계로 분산 처리되는 기존 방식의 오버헤드를 줄여 짧은 쿼리의 응답 시간을 획기적으로 개선하는 기능**입니다. 하지만 이는 셔플을 완전히 제거하는 것이 아니라, 필요한 셔플 작업을 효율적으로 최소화하여 전반적인 쿼리 성능을 향상시키는 데 목적이 있습니다.
 
