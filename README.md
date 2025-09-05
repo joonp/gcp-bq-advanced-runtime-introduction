@@ -155,7 +155,7 @@
 <p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/fd5ef653-9023-4d42-8a9a-3c594cac0e7c">    
 
  - Advanced Runtime **비활성화(disable)** 상태에서의 쿼리 수행 결과
-     - 비활성화 상태에서 테스트 쿼리를 다시 한번 수행하여 주시기 바랍니다. 테스트 수행시에는 **반드시 `Query Settings` 에서 [Use cached results](https://cloud.google.com/bigquery/docs/cached-results#disabling_retrieval_of_cached_results)를 체크 해제**하여 주시기 바랍니다. 
+     - 비활성화 상태에서 테스트 쿼리를 다시 한번 수행하여 주시기 바랍니다. 테스트 쿼리 수행시에는 **반드시 `Query Settings` 에서 [Use cached results](https://cloud.google.com/bigquery/docs/cached-results#disabling_retrieval_of_cached_results)를 체크 해제**하여 주시기 바랍니다. 
 
 <p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/f3c6fa50-013f-4092-b58e-dbbfc1965fcf">    
 
