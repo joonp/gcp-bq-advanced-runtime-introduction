@@ -107,31 +107,31 @@
 
    ```sql
     SELECT
-		   p.category,
-		   dc.name AS distribution_center_name,
-		   u.country AS user_country,
-		   SUM(oi.sale_price) AS total_sales_amount,
-		   COUNT(DISTINCT o.order_id) AS total_unique_orders,
-		   COUNT(DISTINCT o.user_id) AS total_unique_customers_who_ordered,
-		   AVG(oi.sale_price) AS average_item_sale_price,
-		   SUM(CASE WHEN oi.status = 'Complete' THEN 1 ELSE 0 END) AS completed_order_items_count,
-		   COUNT(DISTINCT p.id) AS total_unique_products_sold,
-		   COUNT(DISTINCT ii.id) AS total_unique_inventory_items_sold
+		p.category,
+		dc.name AS distribution_center_name,
+		u.country AS user_country,
+		SUM(oi.sale_price) AS total_sales_amount,
+		COUNT(DISTINCT o.order_id) AS total_unique_orders,
+		COUNT(DISTINCT o.user_id) AS total_unique_customers_who_ordered,
+		AVG(oi.sale_price) AS average_item_sale_price,
+		SUM(CASE WHEN oi.status = 'Complete' THEN 1 ELSE 0 END) AS completed_order_items_count,
+		COUNT(DISTINCT p.id) AS total_unique_products_sold,
+		COUNT(DISTINCT ii.id) AS total_unique_inventory_items_sold
 	FROM
-			`bigquery-public-data.thelook_ecommerce.orders` AS o,
-			`bigquery-public-data.thelook_ecommerce.order_items` AS oi,
-			`bigquery-public-data.thelook_ecommerce.products` AS p,
-			`bigquery-public-data.thelook_ecommerce.inventory_items` AS ii,
-			`bigquery-public-data.thelook_ecommerce.distribution_centers` AS dc,
-			`bigquery-public-data.thelook_ecommerce.users` AS u
+		`bigquery-public-data.thelook_ecommerce.orders` AS o,
+		`bigquery-public-data.thelook_ecommerce.order_items` AS oi,
+		`bigquery-public-data.thelook_ecommerce.products` AS p,
+		`bigquery-public-data.thelook_ecommerce.inventory_items` AS ii,
+		`bigquery-public-data.thelook_ecommerce.distribution_centers` AS dc,
+		`bigquery-public-data.thelook_ecommerce.users` AS u
 	WHERE
-			o.order_id = oi.order_id AND oi.product_id = p.id AND ii.product_distribution_center_id = dc.id AND oi.inventory_item_id = ii.id AND o.user_id = u.id
+		o.order_id = oi.order_id AND oi.product_id = p.id AND ii.product_distribution_center_id = dc.id AND oi.inventory_item_id = ii.id AND o.user_id = u.id
 	GROUP BY
-			p.category,
-			dc.name,
-			u.country
+		p.category,
+		dc.name,
+		u.country
 	ORDER BY
-			total_sales_amount DESC
+		total_sales_amount DESC
 	LIMIT 1000;
  ```
 
