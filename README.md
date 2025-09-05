@@ -62,7 +62,7 @@
 
 결론적으로, **짧은 쿼리 최적화 기능은 빅쿼리에서 다단계로 분산 처리되는 기존 방식의 오버헤드를 줄여 짧은 쿼리의 응답 시간을 획기적으로 개선하는 기능**입니다. 하지만 이는 셔플을 완전히 제거하는 것이 아니라, 필요한 셔플 작업을 효율적으로 최소화하여 전반적인 쿼리 성능을 향상시키는 데 목적이 있습니다.
 
-<p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/6d6eb12e-746a-401b-975b-a5974dafadf2">    
+<p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/6d6eb12e-746a-401b-975b-a5974dafadf2">    
 
 빅쿼리를 아래의 요소들을 종합적으로 고려하여, **Short Query Optimization** 을 적용할지에 대하여 자동으로 결정합니다.
 
