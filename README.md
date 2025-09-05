@@ -152,7 +152,7 @@
 
  - BigQuery Advanced Runtime 기능 **비활성화 상태 확인**
    -   인포메이션 스키마를 통하여 활성화 상태 확인 가능, 상태 변경후 인포메이션 스키마 반영까지는 최대 15초 소요
-   -   쿼리 결과(Results)내역에 **There is no data to display.** 로 나오면 **비활성화(disable)** 상태
+   -   쿼리 결과(Results)내역에 **`There is no data to display.`** 로 나오면 **비활성화(disable)** 상태
 
     ```sql
     SELECT option_name, option_value
