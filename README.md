@@ -124,9 +124,9 @@
 			`bigquery-public-data.thelook_ecommerce.inventory_items` AS ii,
 			`bigquery-public-data.thelook_ecommerce.distribution_centers` AS dc,
 			`bigquery-public-data.thelook_ecommerce.users` AS u
-	  WHERE
+	WHERE
 			o.order_id = oi.order_id AND oi.product_id = p.id AND ii.product_distribution_center_id = dc.id AND oi.inventory_item_id = ii.id AND o.user_id = u.id
-	 GROUP BY
+	GROUP BY
 			p.category,
 			dc.name,
 			u.country
