@@ -1,7 +1,7 @@
 # SQL 2문장으로 빅쿼리 성능 떡상시키는 꿀팁(feat. advanced runtime)
 
 ## Intro(시작하며..)
-구글 클라우드 빅쿼리(BigQuery)는 1998년 구글 설립 이후로 구글 내부에서 연구개발된 모든 기술이 집약되어 있는 매우 고도화된 서비스라고 말할 수가 있습니다. 빅쿼리는 아래의 기술을 사용하여 스토리지와 컴퓨팅 노드를 완전히 분리하고, 각각을 독립적으로 확장할수 있는 **페타바이트 스케일 서버리스 데이터웨어하우스(Petabyte Scale Serverless Data Warehouse)** 입니다.
+구글 클라우드 [빅쿼리(BigQuery)](https://cloud.google.com/bigquery/docs/introduction)는 1998년 구글 설립 이후로 구글 내부에서 연구개발된 모든 기술이 집약되어 있는 매우 고도화된 서비스라고 말할 수가 있습니다. 빅쿼리는 아래의 기술을 사용하여 스토리지와 컴퓨팅 노드를 완전히 분리하고, 각각을 독립적으로 확장할수 있는 **페타바이트 스케일 서버리스 데이터웨어하우스(Petabyte Scale Serverless Data Warehouse)** 입니다.
 
 -   **[Dremel(분산 SQL 실행 엔진)](https://research.google/pubs/dremel-interactive-analysis-of-web-scale-datasets-2/)**: SQL 쿼리를 실행 트리로 변환하여 수만대의 컴퓨팅 노드에서 분산처리
 - **[Colossus(분산 스토리지 시스템)](https://cloud.google.com/blog/products/storage-data-transfer/a-peek-behind-colossus-googles-file-system)**: 데이터를 안정적으로 복제 및 관리 가능한 페타바이트급 스토리지, 빅쿼리는 데이터를 Colossus 환경에 컬럼 기반형태로 저장([Columnar Storage](https://cloud.google.com/bigquery/docs/storage_overview))하여 효율성과 스캔 성능을 극대화
