@@ -1,5 +1,6 @@
 # SQL 2문장으로 빅쿼리 성능 떡상시키는 꿀팁(feat. advanced runtime)
 
+## Intro(시작하며..)
 구글 클라우드 빅쿼리(BigQuery)는 1998년 구글 설립 이후로 구글 내부에서 연구개발된 모든 기술이 집약되어 있는 매우 고도화된 서비스라고 말할 수가 있습니다. 빅쿼리는 아래의 기술을 사용하여 스토리지와 컴퓨팅 노드를 완전히 분리하고, 각각을 독립적으로 확장할수 있는 **페타바이트 스케일 서버리스 데이터웨어하우스(Petabyte Scale Serverless Data Warehouse)** 입니다.
 
 -   **[Dremel(분산 SQL 실행 엔진)](https://research.google/pubs/dremel-interactive-analysis-of-web-scale-datasets-2/)**: SQL 쿼리를 실행 트리로 변환하여 수만대의 컴퓨팅 노드에서 분산처리
@@ -165,7 +166,7 @@
 
 빅쿼리의 Advanced Runtime 기능을 비활성화한 상태(좌측)에서는 쿼리 실행시간이 1초 이상이며, 약20슬롯/초가 소모 되었습니다. 실행 그래프(Execution Graph) 를 살펴보면, 조인(Join) 단계와 집계(Aggregation) 단계에서 많은 시간이 소요 되었습니다. 다만, 기능을 활성화한 상태(우측)에서는 50배 이상 적은 슬롯을 소모하면서, 쿼리수행시간은 0.5초만에 완료가 되었습니다. **Advanced Runtime 기능 활성화를 통하여 빅쿼리 사용자는 더욱 빠른 쿼리 응답시간을 기대할수가 있으며, 추가로 슬롯 소모량이 줄어 들어 슬롯 요금에 대한 절감을 기대할 수 있습니다.**
 
-## Outro(마치며)
+## Outro(마치며..)
 빅쿼리의 장점은 서버리스(Serveless), 컴퓨팅과 스토리지 노드에 대한 분리(Storage and Compute Separation ), 페타 바이트 스케일(Petabyte Scale), BQML(빅쿼리 머신러닝) , Data Security and Governance(데이터 보안 및 거버넌스) 등과 같이 많이 있지만, **가장 큰 장점 중에 하나는 바로 빅쿼리 스스로가 시간이 지남에 따라서 사용자의 개입 없이(SQL쿼리나 데이터 스키마에 대한 변경) 자동으로 쿼리 퍼포먼스 향상을 위한 진화(Self Performance Tuning)를 한다는 것이 아닐까 개인적으로 생각이 됩니다.** 끝까지 읽어 주셔서 대단히 감사합니다. **by Joon Park**
 
   ## 참고자료
