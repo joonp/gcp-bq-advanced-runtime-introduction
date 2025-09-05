@@ -6,11 +6,11 @@
 -   **[Dremel(분산 SQL 실행 엔진)](https://research.google/pubs/dremel-interactive-analysis-of-web-scale-datasets-2/)**: SQL 쿼리를 실행 트리로 변환하여 수만대의 컴퓨팅 노드에서 분산처리
 - **[Colossus(분산 스토리지 시스템)](https://cloud.google.com/blog/products/storage-data-transfer/a-peek-behind-colossus-googles-file-system)**: 데이터를 안정적으로 복제 및 관리 가능한 페타바이트급 스토리지, 빅쿼리는 데이터를 Colossus 환경에 컬럼 기반형태로 저장([Columnar Storage](https://cloud.google.com/bigquery/docs/storage_overview))하여 효율성과 스캔 성능을 극대화
 -   **[Borg(클러스터 관리 시스템)](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/)**: 쿠버네티스(k8s)의 모태(母胎)로 수만대의 클러스터 컴퓨팅 자원을 할당하고 관리하는 시스템, 쿼리 실행에 필요한 자원(CPU, 메모리 등)을 필요한 순간에 필요한 만큼 할당
-- **[Jupiter(초고속 소프트웨어 정의 네트워킹)](https://research.google/pubs/jupiter-evolving-transforming-googles-datacenter-network-via-optical-circuit-switches-and-software-defined-networking/)**: [13.1페타비트/초(Petabit/sec)의 대역폭을 제공하는 기술](https://cloud.google.com/blog/products/networking/speed-scale-reliability-25-years-of-data-center-networking)로써, Dremel 엔진의 각노드(슬롯)간 데이터 셔플링(shuffling)과 같은 대용량 데이터 처리시 네트워크 병목현상 최소화
+- **[Jupiter(초고속 소프트웨어 정의 네트워킹)](https://research.google/pubs/jupiter-evolving-transforming-googles-datacenter-network-via-optical-circuit-switches-and-software-defined-networking/)**: [13.1페타비트/초(Petabit/sec)의 대역폭을 제공하는 기술](https://cloud.google.com/blog/products/networking/speed-scale-reliability-25-years-of-data-center-networking)로써, Dremel 엔진의 각노드(slots)간 데이터 셔플링(shuffling)과 같은 대용량 데이터 처리시 네트워크 병목현상 최소화
 
   <p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/445461e6-3081-4b9d-ba48-3983c7d88739">    
 
-이번에 소개할 **Advanced Runtime은 빅쿼리의 쿼리 처리 성능과 효율성을 향상시키는 기능의 집합체**입니다. 특히 사용자가 기존 데이터에 대한 스키마나 쿼리를 변경할 필요가 없으며, 빅쿼리가 자동으로 적격한 쿼리에 적용하여서 성능을 가속화 할수가 있습니다. 해당 기능은 크게 [Enhanced Vectorization](https://cloud.google.com/blog/products/data-analytics/understanding-bigquery-enhanced-vectorization), [Short Query Optimization](https://cloud.google.com/blog/products/data-analytics/short-query-optimizations-in-bigquery-advanced-runtime) 으로 나누어 집니다.
+이번에 소개할 **Advanced Runtime은 빅쿼리의 쿼리 처리 성능과 효율성을 향상시키는 기능의 집합체**입니다. 특히 사용자가 기존 데이터에 대한 스키마나 쿼리를 변경할 필요가 전혀 없으며, 빅쿼리가 자동으로 적격한 쿼리에 적용하여서 성능을 가속화 할수가 있습니다. 해당 기능은 크게 [Enhanced Vectorization](https://cloud.google.com/blog/products/data-analytics/understanding-bigquery-enhanced-vectorization), [Short Query Optimization](https://cloud.google.com/blog/products/data-analytics/short-query-optimizations-in-bigquery-advanced-runtime) 으로 나누어 집니다.
 
 -  **Enhanced Vectorization** : 벡터화된 런타임을 통하여 조인(Join)과 어그리게이션(Aggregation) 최적화
 -  **Short Query Optimization**: 셔플 및 분산 처리에 대한 오버헤드를 줄여서 숏쿼리(Short Query) 최적화
