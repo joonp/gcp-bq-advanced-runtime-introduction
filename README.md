@@ -8,7 +8,7 @@
 -   **[Borg(클러스터 관리 시스템)](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/)**: 쿠버네티스(k8s)의 모태(母胎)로 수만대의 클러스터 컴퓨팅 자원을 할당하고 관리하는 시스템, 쿼리 실행에 필요한 자원(CPU, 메모리 등)을 필요한 순간에 필요한 만큼 할당
 - **[Jupiter(초고속 소프트웨어 정의 네트워킹)](https://research.google/pubs/jupiter-evolving-transforming-googles-datacenter-network-via-optical-circuit-switches-and-software-defined-networking/)**: [13.1페타비트/초(Petabit/sec)의 대역폭을 제공하는 기술](https://cloud.google.com/blog/products/networking/speed-scale-reliability-25-years-of-data-center-networking)로써, Dremel 엔진의 각노드(slots)간 데이터 셔플링(shuffling)과 같은 대용량 데이터 처리시 네트워크 병목현상 최소화
 
-  <p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/445461e6-3081-4b9d-ba48-3983c7d88739">    
+  <p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/445461e6-3081-4b9d-ba48-3983c7d88739">    
 
 이번에 소개할 **Advanced Runtime은 빅쿼리의 쿼리 처리 성능과 효율성을 향상시키는 기능의 집합체**입니다. 특히 사용자가 기존 데이터에 대한 스키마나 쿼리를 변경할 필요가 전혀 없으며, 빅쿼리가 자동으로 적격한 쿼리에 적용하여서 성능을 가속화 할수가 있습니다. 해당 기능은 크게 [Enhanced Vectorization](https://cloud.google.com/blog/products/data-analytics/understanding-bigquery-enhanced-vectorization), [Short Query Optimization](https://cloud.google.com/blog/products/data-analytics/short-query-optimizations-in-bigquery-advanced-runtime) 으로 나누어 집니다.
 
@@ -21,7 +21,7 @@
 
 스칼라 방식은 쿼리를 처리할때 행단위(`row-by-row`)방식은 쿼리 엔진이 하나의 행(`row`)을 읽고, 해당 행(`row`)의 연산을 마친후 다음 행(row)으로 넘어가는 구조로서, 데이터의 양이 많아질수록 효율이 매우 떨어집니다.
 
-<p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/06437795-e334-44ef-b2c4-70f908a57237">    
+<p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/06437795-e334-44ef-b2c4-70f908a57237">    
 
 반면, **벡터화는 여러 행의 데이터를 묶어서 벡터(Vector)형태로 처리하는 방식**입니다. 한번에 묶인 벡터 데이터에 대하여 쿼리 엔진에서 연산을 수행하므로, 빅쿼리의 벡터화된 쿼리 실행(Vectorized a query execution)은 CPU 캐시 크기의 블록 단위로 컬럼형 데이터를 한번에 처리[SIMD(Single Instruction Multiple Data](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data))하여 효율을 높이는 방식입니다.
 
@@ -29,7 +29,7 @@
 
 -  **인코딩된 데이터에 대한 직접 처리**: 백만개의 행에 단 3개의 고유 값(`sedan, wagon, suv`)만 존재하는 컬럼이 있다면, 딕셔너리 인코딩을 통하여 3개값만 저장하고, 각 행에는 작은 정수 ID(0, 1, 2)만 할당하여 데이터 저장 용량 절감 효과를 제공합니다. 또한, 향상된 벡터화(Enhanced Vectorization)는 해당 **인코딩된 데이터를 풀지(디코딩) 않고 직접 처리하여 중복 계산을 원천적으로 제거하고, 쿼리 처리에 필요한 데이터 용량이 줄기 때문에 쿼리 성능을 극적으로 향상** 시킬수가 있습니다.
 
-<p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/d8763f73-9a6e-4e6f-8128-dbcc8a87e6db">    
+<p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/d8763f73-9a6e-4e6f-8128-dbcc8a87e6db">    
 
 - **표현식 폴딩(Expression Folding)**: 표현식 폴딩은 쿼리 실행 시점에 계산할 필요 없이, 계획(plan) 단계에서 그 결과를 미리 계산할 수 있는 표현식을 상수값으로 대체하는 기법입니다. 빅쿼리는 계획단계에서 쿼리를 분석하여 결과가 항상 동일한 표현식을 찾아내고 이를 상수값으로 접어서(fold) 쿼리 자체를 단순화 합니다. 아래 쿼리에서 `sales_price` 에 `1.1`을 곱하고, 그 결과에 다시 `1.05`를 곱하는 두번의 연산이 있다면, 표현식 폴딩을 적용하여 `1.1 * 1.05` 를 미리 계산하여 `1.155` 라는 상수를 미리 얻어서, 향후 `sales_price * 1.55` 단일 연산으로 쿼리를 실행합니다. 이처럼 표현식 폴딩은 **쿼리 계획 단계에서 상수를 미리 계산하여 실행 시점에 필요한 연산의 양을 줄여 쿼리의 실행 속도를 향상시키고, 빅쿼리 슬롯 자원을 효율적으로 사용** 하게 됩니다.
 
@@ -99,7 +99,7 @@
 
    - 쿼리 결과(results)에서 **option_name(query_runtime), option_value(ADVANCED)** 로 나오면 활성화(enable)된 상태
      
-<p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/9b5175c2-e1c1-407a-b5b6-cc70057453b5">    
+<p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/9b5175c2-e1c1-407a-b5b6-cc70057453b5">    
 
 -   빅쿼리 공개 데이터셋에 존재하는 샘플 테이블에서 **테스트 쿼리 수행**
     -   튜토리얼에서 사용할 데모 쿼리는 전자상거래(e-commerce) 데이터를 통하여 어떤 상품카테고리가 어느 물류센터에서, 어느 국가의 사용자에게 가장 많이 팔렸는지를 분석하는 쿼리입니다. 해당 쿼리는 `orders(주문), products(상품)` 등의 총 6개의 테이블을 조인하여, `WHERE` 절에서 명시한 칼럼`(order_id, product_id 등)` 기준으로, `GROUP BY` 구문을 통하여 그룹화여 해당 컬럼의 값을 집계`(COUNT, AVG, SUM)`하고 결과를 `total_sales_amount` 기준으로 내림차순(DESC)으로 보여주는 쿼리입니다. 해당 쿼리 수행을 통하여 쿼리 실행 결과(경과 시간, 사용된 슬롯 시간, 셔플된 바이트 용량)에 대해서 살펴 보겠습니다.
@@ -138,7 +138,7 @@
 
  - Advanced Runtime **활성화(enable)** 상태에서의 쿼리 수행 결과
 
-<p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/63af5b79-f630-4cc1-9dfa-b770aa21bf77">      
+<p align="center"><img width="800" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/63af5b79-f630-4cc1-9dfa-b770aa21bf77">      
 
  -  BigQuery Advanced Runtime 기능 **비활성화**
        ```sql
@@ -159,16 +159,16 @@
     FROM `region-us`.INFORMATION_SCHEMA.PROJECT_OPTIONS;
     ```
 	-   쿼리 결과(Results)내역에 **`There is no data to display.`** 로 나오면 **비활성화(disable)** 상태
-<p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/fd5ef653-9023-4d42-8a9a-3c594cac0e7c">    
+<p align="center"><img width="800" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/fd5ef653-9023-4d42-8a9a-3c594cac0e7c">    
 
  - Advanced Runtime **비활성화(disable)** 상태에서의 쿼리 수행 결과
      - 비활성화 상태에서 테스트 쿼리를 다시 한번 수행하여 주시기 바랍니다. 테스트 쿼리 수행시에는 **반드시 `Query Settings` 에서 [Use cached results](https://cloud.google.com/bigquery/docs/cached-results#disabling_retrieval_of_cached_results)를 체크 해제**하여 주시기 바랍니다. 
 
-<p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/f3c6fa50-013f-4092-b58e-dbbfc1965fcf">    
+<p align="center"><img width="800" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/f3c6fa50-013f-4092-b58e-dbbfc1965fcf">    
 
 - **Advance Runtime 활성화 여부(enable/disable)에 따른 성능 비교 결과**
 
-<p align="center"><img width="900" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/37dad518-77bb-489b-91fb-9744db908590">    
+<p align="center"><img width="800" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/37dad518-77bb-489b-91fb-9744db908590">    
 
 빅쿼리의 Advanced Runtime 기능을 비활성화한 상태(좌측)에서는 쿼리 실행시간이 1초 이상이며, 약20슬롯/초가 소모 되었습니다. 실행 그래프(Execution Graph) 를 살펴보면, 조인(Join) 단계와 집계(Aggregation) 단계에서 많은 시간이 소요 되었습니다. 다만, 기능을 활성화한 상태(우측)에서는 50배 이상 적은 슬롯을 소모하면서, 쿼리수행시간은 0.5초만에 완료가 되었습니다. **Advanced Runtime 기능 활성화를 통하여 빅쿼리 사용자는 더욱 빠른 쿼리 응답시간을 기대할수가 있으며, 추가로 슬롯 소모량이 줄어 들어 슬롯 요금에 대한 절감을 기대할 수 있습니다.**
 
