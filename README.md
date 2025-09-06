@@ -23,7 +23,7 @@
 
 <p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/06437795-e334-44ef-b2c4-70f908a57237">    
 
-반면, **벡터화는 여러 행의 데이터를 묶어서 벡터(Vector)형태로 처리하는 방식**입니다. 한번에 묶인 벡터 데이터에 대하여 쿼리 엔진에서 연산을 수행하므로, 빅쿼리의 벡터화된 쿼리 실행(Vectorized a query execution)은 CPU 캐시 크기의 블록 단위로 컬럼형 데이터를 한번에 처리[SIMD(Single Instruction Multiple Data](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data))하여 효율을 높이는 방식입니다.
+반면, **벡터화는 여러 행의 데이터를 묶어서 벡터(Vector)형태로 처리하는 방식**입니다. 한번에 묶인 벡터 데이터에 대하여 쿼리 엔진에서 연산을 수행하므로, 빅쿼리의 벡터화된 쿼리 실행(Vectorized a query execution)은 CPU 캐시 크기의 블록 단위로 컬럼형 데이터를 한번에 처리([SIMD(Single Instruction Multiple Data](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data))하여 효율을 높이는 방식입니다.
 
 여기서 추가로, 데이터 인코딩 최적화(Data-encoding-enabled optimizations), 표현식 폴딩(Expression Folding), 공통 하위 표현식 제거(Common Subexpression Elimination), 병렬화 가능한 조인 및 집계 알고리즘(Parallelizable join and aggregation algorithms) 등과 같은 기술을 추가하여 쿼리처리에 벡터화(Vectorization)를 적용하였습니다.
 
