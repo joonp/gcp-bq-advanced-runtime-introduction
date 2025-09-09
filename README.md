@@ -19,7 +19,7 @@
     
 벡터화(Vectorization)는 과거의 CPU가 한번에 하나의 데이터만 처리하는 [스칼라(Scalar)](https://ko.wikipedia.org/wiki/%EC%8A%A4%EC%B9%BC%EB%9D%BC_%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9C) 방식이 아닌, [SIMD(Single Instruction Multiple Data](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)) 기술을 통하여 한번의 명령어로 여러 데이터를 동시에 처리할 수 있는 방식을 말합니다.
 
-스칼라 방식은 쿼리를 처리할때 행단위(`row-by-row`)방식은 쿼리 엔진이 하나의 행(`row`)을 읽고, 해당 행(`row`)의 연산을 마친후 다음 행(row)으로 넘어가는 구조로서, 데이터의 양이 많아질수록 효율이 매우 떨어집니다.
+스칼라 방식은 쿼리를 처리할때 행단위(`row-by-row`)방식으로 쿼리 엔진이 하나의 행(`row`)을 읽고, 해당 행(`row`)의 연산을 마친후 다음 행(row)으로 넘어가는 구조로서, 데이터의 양이 많아질수록 효율이 매우 떨어집니다.
 
 <p align="center"><img width="700" alt="Screenshot 2024-07-28 at 4 21 13 PM" src="https://github.com/user-attachments/assets/06437795-e334-44ef-b2c4-70f908a57237">    
 
